@@ -69,7 +69,7 @@ mysqlBuildInfo lbi = do
   include <- mysqlConfig ["--include"]
   libs <- mysqlConfig ["--libs"]
   libsR <- mysqlConfig ["--libs_r"]
-  libsSys' <- mysqlConfig ["--libs_sys"] `catch` libsFromError
+  let libsSys' = ["-lws2_32", "-ladvapi32", "-lkernel32", "-lshlwapi", "-lcrypt32", "-llibz", "-lsecur32"]
 
   -- On some systems, `mysql_config` fails to give an error status even though
   -- it cannot handle `--libs_sys`.  The "Usage:" message lists libraries we do
